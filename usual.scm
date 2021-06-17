@@ -66,7 +66,8 @@
   (syntax-rules (: list vec grid)
     ((_ [var : list n])
      (define var
-       (map (^ (_) (my-read)) (lrange 0 n))))
+       (let loop ([i n])
+         (if (zero? i) () (cons (my-read) (loop (- i 1)))))))
     ((_ [var : vec n])
      (define var
        (let ([v (make-vector n)])
